@@ -1,0 +1,38 @@
+// Get all todos
+  $.getJSON("/api/todos")
+  .then(addTodos)
+  .catch(function(err) {
+      console.log(err);
+  });
+
+
+//EVENT LISTENER
+
+    //keypress submit listener
+    $('#todoInput').keypress(function(event) {
+        if(event.which == 13) {
+            if($(this).val() != "") {
+                createTodo();
+            } else {
+                alert("please enter a todo.")
+            }
+        } 
+    });
+    
+    //button click submit listener
+    $('#todoInputBTN').on("click", function(event) {
+        if($('#todoInput').val() != "") {
+            createTodo();
+        } else {
+            alert("please enter a todo.")
+        }
+    });
+    
+    //update
+    $('.list').on('click', 'li', function() {
+        updateTodo($(this));
+    })
+    $('.list').on('click', 'span', function(event) {
+        event.stopPropagation();
+        removeTodo($(this).parent());
+    });

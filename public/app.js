@@ -1,37 +1,7 @@
 /* global $ */
 
 $(document).ready(function() {
-    $.getJSON("/api/todos")
-    .then(addTodos)
-    .catch(function(err) {
-        console.log(err);
-    });
     
-    $('#todoInput').keypress(function(event) {
-        if(event.which == 13) {
-            if($(this).val() != "") {
-                createTodo();
-            } else {
-                alert("please enter a todo.")
-            }
-        } 
-    });
-    $('#todoInputBTN').on("click", function(event) {
-        if($('#todoInput').val() != "") {
-            createTodo();
-        } else {
-            alert("please enter a todo.")
-        }
-    });
-    
-    $('.list').on('click', 'li', function() {
-        updateTodo($(this));
-    })
-    
-    $('.list').on('click', 'span', function(event) {
-        event.stopPropagation();
-        removeTodo($(this).parent());
-    });
 });
 
 function addTodos(todos) {
